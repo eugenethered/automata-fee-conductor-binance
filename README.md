@@ -1,2 +1,4 @@
-# automata-fee-conductor
-Automata Fee Conductor
+# Automata Fee Conductor
+
+## Packaging
+`python3 -m build`

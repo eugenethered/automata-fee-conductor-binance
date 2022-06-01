@@ -41,10 +41,12 @@ class BinanceTradeFeeFilter(TradeFeeFilter):
         # binance does not provide this at account level, rather for every instrument
         return None
 
-    def obtain_instrument_trade_fee(self, instrument) -> Optional[BigFloat]:
+    def obtain_instrument_trade_fee(self, instrument_exchange) -> Optional[BigFloat]:
         try:
             self.lazy_init_client()
-            instrument_fees = self.client.trade_fee(symbol=instrument)
+            symbol = self.convert_to_binance_symbol(instrument_exchange)
+            self.log.debug(f'Attempting to obtain binance fee for [{symbol}]')
+            instrument_fees = self.client.trade_fee(symbol=symbol)
             if instrument_fees is None or len(instrument_fees) == 0:
                 return None
             fees = instrument_fees[0]
@@ -55,3 +57,7 @@ class BinanceTradeFeeFilter(TradeFeeFilter):
         except ClientError as binance_client_error:
             self.log.warning(f'Unable to authenticate binance client, error:[{binance_client_error.error_message}]')
             raise UnableToAuthenticateError(binance_client_error.error_message)
+
+    @staticmethod
+    def convert_to_binance_symbol(instrument_exchange):
+        return str(instrument_exchange).replace('/', '').upper()

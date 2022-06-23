@@ -2,6 +2,7 @@ import logging
 import time
 
 from cache.holder.RedisCacheHolder import RedisCacheHolder
+from cache.provider.RedisCacheProviderWithHash import RedisCacheProviderWithHash
 
 from binancefee.BinanceFeeConductor import BinanceFeeConductor
 
@@ -16,14 +17,14 @@ if __name__ == '__main__':
         'PROCESS_RUN_PROFILE_KEY': '{}:process:run-profile:{}',
         'FEE_FILTER': 'takerCommission',
         'ACCOUNT_TRADE_FEE_KEY': 'binance:fee:trade:account',
-        'INSTRUMENT_TRADE_FEE_KEY': 'binance:fee:trade:instrument',
-        'INSTRUMENT_EXCHANGES_KEY': 'binance:exchange:instruments',
+        'INSTRUMENT_TRADE_FEE_KEY': 'binance:fee:trade:mv:instrument',
+        'INSTRUMENT_EXCHANGES_KEY': 'binance:exchange:mv:instruments',
         'VERSION': '0.0.1'
     }
 
     logging.basicConfig(level=logging.DEBUG)
 
-    RedisCacheHolder(options)
+    RedisCacheHolder(options, held_type=RedisCacheProviderWithHash)
 
     start_time = time.perf_counter()
 

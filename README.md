@@ -1,4 +1,5 @@
 # Automata Fee Conductor
 
-## Packaging
-`python3 -m build`
+## Docker
+`docker build . -t automata-fee-conductor-binance`
+

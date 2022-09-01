@@ -1,4 +1,5 @@
-FROM python:3.10.6-alpine AS builder
+FROM python:3.10.6-alpine AS BUILDER
+LABEL stage=BUILDER
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
@@ -8,7 +9,7 @@ FROM python:3.10.6-alpine
 RUN adduser -D apprunner
 USER apprunner
 WORKDIR /app
-COPY --from=builder /usr/local/lib/python3.10/site-packages/ /usr/local/lib/python3.10/site-packages/
+COPY --from=BUILDER /usr/local/lib/python3.10/site-packages/ /usr/local/lib/python3.10/site-packages/
 COPY ./binancefee ./binancefee
 ENV PYTHONPATH="${PYTHONPATH}:/app/binancefee"
 CMD ["python", "binancefee/__main__.py"]

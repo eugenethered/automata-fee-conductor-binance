@@ -1,5 +1,7 @@
 # Automata Fee Conductor
 
 ## Docker
-`docker build . -t automata-fee-conductor-binance`
+1. `docker build . -t automata-fee-conductor-binance`
+2. `docker image prune --filter label=stage=BUILDER`
+
 

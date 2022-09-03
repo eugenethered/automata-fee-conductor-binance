@@ -11,5 +11,15 @@ USER apprunner
 WORKDIR /app
 COPY --from=BUILDER /usr/local/lib/python3.10/site-packages/ /usr/local/lib/python3.10/site-packages/
 COPY --chown=apprunner:apprunner ./binancefee ./binancefee
-ENV PYTHONPATH="${PYTHONPATH}:/app/binancefee"
+
+ENV PYTHONPATH="${PYTHONPATH}:/app/binancefee" \
+    MARKET=binance \
+    REDIS_SERVER_ADDRESS=127.0.0.1 \
+    REDIS_SERVER_PORT=6379 \
+    AUTH_INFO_KEY=binance:auth:info \
+    FEE_FILTER=takerCommission \
+    ACCOUNT_TRADE_FEE_KEY=binance:fee:trade:account \
+    INSTRUMENT_TRADE_FEE_KEY=binance:fee:trade:mv:instrument \
+    INSTRUMENT_EXCHANGES_KEY=binance:exchange:mv:instruments
+
 CMD ["python", "binancefee/__main__.py"]

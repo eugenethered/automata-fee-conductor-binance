@@ -20,6 +20,9 @@ ENV PYTHONPATH="${PYTHONPATH}:/app/binancefee" \
     FEE_FILTER=takerCommission \
     ACCOUNT_TRADE_FEE_KEY=binance:fee:trade:account \
     INSTRUMENT_TRADE_FEE_KEY=binance:fee:trade:mv:instrument \
-    INSTRUMENT_EXCHANGES_KEY=binance:exchange:mv:instruments
+    INSTRUMENT_EXCHANGES_KEY=binance:exchange:mv:instruments \
+    VERSION=0.1 \
+    PROCESS_RUN_PROFILE_KEY={}:process:run-profile:{} \
+    PROCESS_KEY={}:process:status:{}
 
 CMD ["python", "binancefee/__main__.py"]

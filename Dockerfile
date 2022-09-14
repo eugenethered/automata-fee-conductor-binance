@@ -23,6 +23,6 @@ ENV PYTHONPATH="${PYTHONPATH}:/app/binancefee" \
     INSTRUMENT_EXCHANGES_KEY=binance:exchange:mv:instruments \
     VERSION=0.1 \
     PROCESS_RUN_PROFILE_KEY=binance:process:mv:run-profile \
-    PROCESS_KEY=binance:process:status
+    PROCESS_KEY=binance:process:mv:status
 
 CMD ["python", "binancefee/__main__.py"]
